@@ -8,7 +8,7 @@ connectDB();
 app.use(express.json());
 const usersRoute = require("./routes/usersRoute");
 
-app.use("./api/users", usersRoute);
+app.use("/api/users", usersRoute);
 const port = process.env.PORT || 9000;
 
 app.listen(port, () => {

@@ -1,9 +1,21 @@
 import React from "react";
-
-import { Form } from "antd";
+import { Form, message } from "antd";
 import { Link } from "react-router-dom";
+import { registerUser } from "../../../apiCalls/users";
 
 const Register = () => {
+  const onFinish = async (values) => {
+    try {
+      const response = await registerUser(values);
+      if (response.success) {
+        message.success(response.message);
+      } else {
+        message.error(response.message);
+      }
+    } catch (error) {
+      message.error(error.message);
+    }
+  };
   return (
     <div className="flex justify-center items-center h-screen w-screen bg-primary">
       <div className="card w-400 p-3 bg-white">
@@ -14,7 +26,7 @@ const Register = () => {
             </h1>
           </div>
           <div className="divider"></div>
-          <Form layout="vertical" className="mt-2">
+          <Form layout="vertical" className="mt-2" onFinish={onFinish}>
             <Form.Item name="name" label="Name">
               <input type="text" />
             </Form.Item>

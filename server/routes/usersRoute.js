@@ -3,11 +3,11 @@ const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 
 // user registration
-router.post("./register", async (reg, res) => {
+router.post("/register", async (req, res) => {
   try {
     //check if the user is exist or not
-    const userExist = await User.findOne({ email: req.body.email });
-    if (userExist) {
+    const userExists = await User.findOne({ email: req.body.email });
+    if (userExists) {
       return res
         .status(200)
         .send({ message: "User already exists", success: false });
